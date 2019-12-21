@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+//styles
+@import 'login.scss';
+@import 'register.scss';
+@import 'clients.scss';
+@import 'register_client.scss';
+@import 'registerAccount.scss';
+@import 'editClient.scss';
+
+body {
+    background-color: #ffffff;
+}
+

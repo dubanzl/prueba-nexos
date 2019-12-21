@@ -1,0 +1,32 @@
+.register {
+    .bank-icon {
+        width: 80px;
+        margin: 20px 0;
+    }
+
+    .register-box {
+        box-shadow: 10px 10px 20px rgba(3,27,78,.1);
+        padding: 35px;
+        border-radius: 7px;
+
+        button {
+            width: 100%;
+            padding: 12px 5px;
+            border-radius: 3px;
+        }
+
+        .recovery-password-link {
+            float:right;
+        }
+
+        .register-account-link {
+            margin-top: 22px;
+        }
+
+        .login-title {
+            font-size: 24px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+    }
+}

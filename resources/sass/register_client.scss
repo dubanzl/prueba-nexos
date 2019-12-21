@@ -1,0 +1,22 @@
+.register-client {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+    .buttons-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+
+  .form-row {
+    margin-top: 10px;
+    box-shadow: 10px 10px 20px rgba(3,27,78,.1);
+    padding: 15px 35px;
+    border-radius: 10px;
+  }
+}

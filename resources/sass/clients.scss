@@ -1,0 +1,61 @@
+.clients {
+
+    .client-item {
+        padding: 10px;
+
+        .client-box {
+            box-shadow: 10px 10px 20px rgba(3,27,78,.1);
+            padding: 15px;
+            border-radius: 7px;
+
+            p {
+
+                @media (min-width: 768px){
+                    line-height: 0.5;
+                }
+                span {
+                    font-weight: bold;
+                    color: #53525286;
+                }
+            }
+
+            .client-options {
+                position: absolute;
+                display: flex;
+                justify-content: flex-end;
+                right: 24px;
+
+                .btn {
+                    padding: 0px 5px!important;
+                }
+            }
+
+            .client-header {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                i {
+                    font-size: 60px;
+                    padding: 20px;
+                }
+
+                div {
+                    p {
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+
+                    p:first-child {
+                        line-height: 0.5;
+                        font-size: 14px;
+                        color: #53525286;
+                    }
+                    p:nth-child(2) {
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+}
