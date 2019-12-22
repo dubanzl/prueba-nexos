@@ -86230,7 +86230,7 @@ function (_Component) {
           description = _this$state3.description;
       var disabled = true;
 
-      if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(account.account_number) || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(type_transaction) || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(available_balance) || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(description)) {
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(account.account_number) || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(type_transaction) || available_balance == 0 || Object(lodash__WEBPACK_IMPORTED_MODULE_3__["isEmpty"])(description)) {
         disabled = true;
       } else {
         disabled = false;
@@ -86684,8 +86684,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/andreszl/projects/nexos-bank-manager/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/andreszl/projects/nexos-bank-manager/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/andreszl/projects/prueba-nexos/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/andreszl/projects/prueba-nexos/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

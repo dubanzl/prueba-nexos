@@ -97,7 +97,7 @@ class MakeTransaction extends Component {
 
         let disabled = true;
 
-        if (isEmpty(account.account_number) || isEmpty(type_transaction) || isEmpty(available_balance) || isEmpty(description)) {
+        if (isEmpty(account.account_number) || isEmpty(type_transaction) || (available_balance) == 0 || isEmpty(description)) {
             disabled = true;
         } else {
             disabled = false;
