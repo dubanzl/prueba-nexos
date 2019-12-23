@@ -77945,7 +77945,7 @@ function useWaitForDOMRef(ref, onResolved) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85526,7 +85526,9 @@ function (_Component) {
     _this.state = {
       clients: [],
       show: false,
+      showTransactions: false,
       accounts: [],
+      transactions: [],
       clientId: null,
       message: false
     };
@@ -85538,6 +85540,7 @@ function (_Component) {
     value: function handleClose() {
       this.setState({
         show: false,
+        showTransactions: false,
         accounts: [],
         clientId: null
       });
@@ -85547,6 +85550,13 @@ function (_Component) {
     value: function handleShow() {
       this.setState({
         show: true
+      });
+    }
+  }, {
+    key: "handleShowTransactions",
+    value: function handleShowTransactions() {
+      this.setState({
+        showTransactions: true
       });
     }
   }, {
@@ -85633,13 +85643,43 @@ function (_Component) {
       });
     }
   }, {
+    key: "getTransaciones",
+    value: function getTransaciones(clientId) {
+      var transactions;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getTransaciones$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              console.log(clientId);
+              _context4.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/transactions/".concat(clientId)).then(function (response) {
+                return response.json();
+              }).then(function (transactions) {
+                return transactions;
+              }));
+
+            case 3:
+              transactions = _context4.sent;
+              this.handleShowTransactions();
+              this.setState({
+                transactions: transactions
+              });
+
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
     key: "generateAccount",
     value: function generateAccount(clientId, identity_card) {
       var _this2 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function generateAccount$(_context4) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function generateAccount$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               fetch('/api/accounts/', {
                 method: 'post',
@@ -85665,7 +85705,7 @@ function (_Component) {
 
             case 1:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
       });
@@ -85679,7 +85719,9 @@ function (_Component) {
           clients = _this$state.clients,
           show = _this$state.show,
           accounts = _this$state.accounts,
-          message = _this$state.message;
+          message = _this$state.message,
+          transactions = _this$state.transactions,
+          showTransactions = _this$state.showTransactions;
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "clients"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -85735,12 +85777,33 @@ function (_Component) {
           onClick: function onClick() {
             return _this3.generateAccount(client.id, client.identity_card);
           }
-        }, "Generar cuenta de ahorros"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        }, "Generar cuenta de ahorros"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          className: "dropdown-item",
+          onClick: function onClick() {
+            return _this3.getTransaciones(client.id);
+          }
+        }, "Ver historial transaci\xF3nes"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "client-header"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
           className: "fas fa-user"
         }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Nombre Cliente"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, client.name, " ", client.lastname, " "))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Correo\xA0 "), " ", client.email), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Documento\xA0 "), " ", client.type_documents, " ", client.identity_card), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Telefono\xA0 "), " ", client.phone), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Direci\xF3n\xA0 "), " ", client.address, " ")));
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], {
+        show: showTransactions,
+        onHide: function onHide() {
+          return _this3.handleClose;
+        },
+        animation: false
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Header, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Title, null, "historial de transaci\xF3nes")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Body, null, transactions.map(function (transactions) {
+        var type_transaction = transactions.type_transaction == 'C' ? 'Consignación' : 'Retiro';
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          key: transactions.id
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Numero de Cuenta:"), " ", transactions.number_account), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Valor de la transaci\xF3n:"), " ", transactions.amount, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Fecha de la transaci\xF3n:"), " ", transactions.created_at, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Tipo transaci\xF3n "), ": ", type_transaction, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Descripci\xF3n"), ": ", transactions.description, " "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null));
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Footer, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        variant: "secondary",
+        onClick: function onClick() {
+          return _this3.handleClose();
+        }
+      }, "Cerrar"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], {
         show: show,
         onHide: function onHide() {
           return _this3.handleClose;
@@ -86684,8 +86747,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/andreszl/projects/prueba-nexos/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/andreszl/projects/prueba-nexos/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /root/Documents/prueba-nexos/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /root/Documents/prueba-nexos/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

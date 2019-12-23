@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Transactions::all();
+        $transactions = Transactions::where('transactions.cashier_code', $request->clientId)
+        ->select('transactions.*')->get();
+        return response()->json($transactions, 201);
     }
 
     public function store(Request $request)

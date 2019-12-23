@@ -11,17 +11,24 @@ class Clients extends Component {
         this.state = {
             clients: [],
             show: false,
+            showTransactions: false,
             accounts: [],
+            transactions: [],
             clientId: null,
             message: false,
         }
     }
 
      handleClose (){
-         this.setState({ show: false, accounts: [], clientId: null})
+         this.setState({ show: false, showTransactions: false, accounts: [], clientId: null})
      };
+
     handleShow() {
         this.setState({ show: true });
+    }
+
+    handleShowTransactions() {
+        this.setState({ showTransactions: true });
     }
 
     async componentDidMount() {
@@ -61,6 +68,19 @@ class Clients extends Component {
             });
     }
 
+    async getTransaciones(clientId){
+        console.log(clientId);
+        const transactions = await fetch(`/api/transactions/${clientId}`)
+        .then(response => {
+            return response.json();
+        }).then(transactions => {
+            return transactions;
+        });
+
+        this.handleShowTransactions();
+        this.setState({ transactions });
+    }
+
     async generateAccount(clientId, identity_card) {
 
         fetch('/api/accounts/',
@@ -85,7 +105,7 @@ class Clients extends Component {
     }
 
 	render() {
-        const { clients, show, accounts, message } = this.state;
+        const { clients, show, accounts, message, transactions, showTransactions } = this.state;
 
         return(
             <div className="clients">
@@ -112,6 +132,7 @@ class Clients extends Component {
                                                     <a className="dropdown-item" onClick={() => this.getAccounts(client.id)}>Ver cuentas de ahorros</a>
                                                     <a className="dropdown-item" onClick={() => this.props.history.push(`realizar-transaccion/cliente/${client.id}`) }>Realizar transación</a>
                                                     <a className="dropdown-item" onClick={() => this.generateAccount(client.id, client.identity_card) }>Generar cuenta de ahorros</a>
+                                                    <a className="dropdown-item" onClick={() => this.getTransaciones(client.id) }>Ver historial transaciónes</a>
                                                 </div>
                                             </div>
                                             <div className="client-header">
@@ -130,6 +151,36 @@ class Clients extends Component {
                                 );
                             })
                         }
+
+                        <Modal show={showTransactions} onHide={() => this.handleClose} animation={false}>
+                            <Modal.Header>
+                            <Modal.Title>historial de transaciónes</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                {
+                                    transactions.map((transactions) => {
+                                        const type_transaction = transactions.type_transaction == 'C' ? 'Consignación' : 'Retiro';
+                                        return (
+                                            <div key={transactions.id}>
+                                                <h5><b>Numero de Cuenta:</b> {transactions.number_account}</h5>
+                                                <p><b>Valor de la transación:</b> { transactions.amount} </p>
+                                                <p><b>Fecha de la transación:</b> { transactions.created_at} </p>
+                                                <p><b>Tipo transación </b>: {type_transaction} </p>
+                                                <p><b>Descripción</b>: { transactions.description } </p>
+                                                <hr />
+                                            </div>
+                                        )
+                                    })
+                                }
+
+                            </Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={() => this.handleClose()}>
+                                Cerrar
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
+
 
                         <Modal show={show} onHide={() => this.handleClose} animation={false}>
                             <Modal.Header>

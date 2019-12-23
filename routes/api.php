@@ -35,6 +35,6 @@ Route::put('accounts/{accountId}','AcountsController@update');
 
 
 // api transactions
-Route::get('transactions','TransactionsController@index');
+Route::get('transactions/{clientId}','TransactionsController@index');
 
 Route::post('transactions','TransactionsController@store');
